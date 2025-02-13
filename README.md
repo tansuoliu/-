@@ -1,273 +1,136 @@
-<!DOCTYPE html>
+<酥酥-情人节礼物>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>永恒之约 | 刘宇航 ❤️ 李爽</title>
+    <title>情人节礼物 - 刘宇航 ❤️ 李爽</title>
     <style>
-        :root {
-            --primary: #ff3366;
-            --secondary: #ff758c;
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Microsoft YaHei', sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63);
+            font-family: 'Arial', sans-serif;
+            background: url('https://i.imgur.com/6QZQZQZ.png') no-repeat center center fixed;
+            background-size: cover;
             overflow: hidden;
-            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-
         .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            max-width: 800px;
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .title {
-            text-align: center;
+        h1 {
+            color: #ff6f61;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ff6f61;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background: #ff6f61;
             color: white;
-            margin-bottom: 40px;
-            position: relative;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
-
-        .title h1 {
-            font-size: 3.5em;
-            text-shadow: 0 0 20px var(--primary);
-            animation: glow 2s ease-in-out infinite;
+        button:hover {
+            background: #ff3b2f;
         }
-
-        .timeline {
-            position: relative;
-            padding: 40px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        }
-
-        .timeline-item {
-            position: relative;
-            width: 50%;
-            padding: 20px;
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
+            animation: fadeIn 2s forwards;
         }
-
-        .timeline-item.left {
-            left: 0;
-            text-align: right;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
-
-        .timeline-item.right {
-            left: 50%;
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            position: relative;
-            backdrop-filter: blur(5px);
-        }
-
-        .heart-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
         .heart {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            transform: rotate(45deg);
-            animation: pulse 2s infinite;
+            top: -10%;
+            font-size: 2em;
+            color: #ff6f61;
+            animation: fall 5s linear infinite;
         }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -25px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: -25px;
-            top: 0;
-        }
-
-        @keyframes pulse {
-            0% { transform: rotate(45deg) scale(1); }
-            50% { transform: rotate(45deg) scale(1.2); }
-            100% { transform: rotate(45deg) scale(1); }
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px var(--primary); }
-            50% { text-shadow: 0 0 40px var(--secondary); }
-        }
-
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
         }
     </style>
 </head>
 <body>
-    <canvas class="particles" id="canvas"></canvas>
-
-    <div class="heart-container">
-        <div class="heart"></div>
-    </div>
-
     <div class="container">
-        <div class="title">
-            <h1>刘宇航 ❤️ 李爽</h1>
-            <p style="color: rgba(255,255,255,0.8); margin-top: 20px;">2023.03.09 - 永恒</p>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item left" style="transition-delay: 0.2s;">
-                <div class="timeline-content">
-                    <h3 style="color: var(--primary);">初见</h3>
-                    <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">2023年3月9日<br>命运安排我们在时光长河中相遇</p>
-                </div>
-            </div>
-
-            <div class="timeline-item right" style="transition-delay: 0.4s;">
-                <div class="timeline-content">
-                    <h3 style="color: var(--primary);">相知</h3>
-                    <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">365个日夜的温暖<br>每个瞬间都在编织我们的故事</p>
-                </div>
-            </div>
-
-            <div class="timeline-item left" style="transition-delay: 0.6s;">
-                <div class="timeline-content">
-                    <h3 style="color: var(--primary);">相爱</h3>
-                    <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">星辰见证的誓言<br>心跳的节奏谱成永恒乐章</p>
-                </div>
-            </div>
-
-            <div class="timeline-item right" style="transition-delay: 0.8s;">
-                <div class="timeline-content">
-                    <h3 style="color: var(--primary);">未来</h3>
-                    <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">以爱为舟<br>共渡每一个朝阳与星夜</p>
-                </div>
-            </div>
-        </div>
+        <h1>💖 情人节快乐！ 💖</h1>
+        <p>请输入你们的名字：</p>
+        <input type="text" id="loverName" placeholder="爱人的名字">
+        <input type="text" id="yourName" placeholder="你的名字">
+        <button onclick="checkNames()">生成祝福</button>
+        <div id="message" class="message"></div>
     </div>
+
+    <!-- 动态爱心 -->
+    <div id="hearts"></div>
 
     <script>
-        // 粒子背景
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function checkNames() {
+            const loverName = document.getElementById('loverName').value;
+            const yourName = document.getElementById('yourName').value;
+            const messageDiv = document.getElementById('message');
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = Math.random() * 3 - 1.5;
-                this.speedY = Math.random() * 3 - 1.5;
+            if (loverName !== '李爽' || yourName !== '刘宇航') {
+                alert('请输入正确的名字哦！');
+                return;
             }
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+            const messages = [
+                `亲爱的李爽，`,
+                `从2023年3月9号相识相知相爱至今，`,
+                `每一天与你在一起都是幸福的时光。`,
+                `你是我生命中最美好的存在，`,
+                `无论未来如何，我都会一直爱你、珍惜你。`,
+                `爱你的，刘宇航 💕`
+            ];
 
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
+            messageDiv.innerHTML = messages.join('<br>');
+        }
 
-            draw() {
-                ctx.fillStyle = `rgba(255,51,102,${this.size/2})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+        // 动态生成爱心
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                heartsContainer.appendChild(heart);
             }
         }
 
-        const particles = Array(200).fill().map(() => new Particle());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // 时间轴动画
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        window.addEventListener('scroll', () => {
-            timelineItems.forEach(item => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < window.innerHeight * 0.8) {
-                    item.style.opacity = 1;
-                    item.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        // 动态爱心
-        document.addEventListener('click', (e) => {
-            const heart = document.createElement('div');
-            heart.style.cssText = `
-                position: absolute;
-                left: ${e.clientX - 10}px;
-                top: ${e.clientY - 10}px;
-                width: 20px;
-                height: 20px;
-                background: ${Math.random() > 0.5 ? '#ff3366' : '#ff758c'};
-                transform: rotate(45deg);
-                animation: burst 0.8s linear forwards;
-            `;
-
-            heart.innerHTML = '<div></div>';
-            document.body.appendChild(heart);
-            
-            setTimeout(() => heart.remove(), 800);
-        });
+        // 初始化爱心
+        createHearts();
     </script>
 </body>
 </html>
